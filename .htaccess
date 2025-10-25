@@ -1,0 +1,15 @@
+# Redirect all requests to the public directory front controller
+RewriteEngine On
+RewriteBase /
+
+# Allow direct access to existing files in the public directory
+RewriteRule ^public/ - [L]
+
+# Redirect root to the public front controller
+RewriteRule ^$ public/index.php [L]
+
+# Rewrite everything else to the public directory
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]
